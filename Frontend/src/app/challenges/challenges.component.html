@@ -1,0 +1,68 @@
+<div class="scoreboard-container">
+  <div class="header">
+
+    <div class="stats-bar">
+      <div class="stat">Total Challenges: {{challenges.length}}</div>
+      <div class="stat">Solved: {{solvedCount}}</div>
+      <div class="stat">Available Points: {{availablePoints}}</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-group">
+      <label>
+        <span class="hack-text">&gt;</span> Category:
+        <select [(ngModel)]="selectedCategory">
+          <option value="">All</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="filter-group">
+      <label>
+        <span class="hack-text">&gt;</span> Difficulty:
+        <select [(ngModel)]="selectedDifficulty">
+          <option value="">All</option>
+          <option *ngFor="let diff of difficulties" [value]="diff">{{diff}}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="filter-group">
+      <label>
+        <span class="hack-text">&gt;</span> Status:
+        <select [(ngModel)]="selectedStatus">
+          <option value="">All</option>
+          <option value="solved">Solved</option>
+          <option value="unsolved">Unsolved</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="challenges-grid">
+    <div *ngFor="let challenge of filteredChallenges"
+         class="challenge-card"
+         [class.solved]="challenge.solved">
+      <div class="challenge-header">
+        <span class="category-tag">{{challenge.category}}</span>
+        <span class="points">{{challenge.points}} pts</span>
+      </div>
+      <h3 class="challenge-name">
+        <span class="hack-text">&gt;</span> {{challenge.name}}
+      </h3>
+      <div class="challenge-footer">
+            <span class="difficulty" [class]="challenge.difficulty.toLowerCase()">
+              {{challenge.difficulty}}
+            </span>
+        <span class="solved-by">
+              Solved by: {{challenge.solvedBy}}
+            </span>
+      </div>
+      <button class="solve-btn" [disabled]="challenge.solved">
+        {{ challenge.solved ? 'SOLVED' : 'SOLVE' }}
+      </button>
+    </div>
+  </div>
+</div>

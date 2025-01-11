@@ -1,0 +1,36 @@
+<div class="scoreboard-container">
+  <div class="header">
+    <h1><span class="hack-text">[</span> CTF Scoreboard <span class="hack-text">]</span></h1>
+    <div class="stats-bar">
+      <div class="stat">Teams: {{teams.length}}</div>
+      <div class="stat">Total Points: {{totalPoints}}</div>
+      <div class="stat">Last Update: {{lastUpdate}}</div>
+    </div>
+  </div>
+
+  <div class="scoreboard-table">
+    <div class="table-header">
+      <div class="col-rank">#</div>
+      <div class="col-team">Team</div>
+      <div class="col-country">Country</div>
+      <div class="col-points">Points</div>
+      <div class="col-solved">Solved</div>
+      <div class="col-last">Last Solve</div>
+    </div>
+
+    <div *ngFor="let team of teams"
+         class="table-row"
+         [class.top-three]="team.rank <= 3">
+      <div class="col-rank">
+        <span class="hack-text">[</span>{{team.rank}}<span class="hack-text">]</span>
+      </div>
+      <div class="col-team">
+        <span class="hack-text">&gt;</span> {{team.name}}
+      </div>
+      <div class="col-country">{{team.country}}</div>
+      <div class="col-points">{{team.points}}</div>
+      <div class="col-solved">{{team.solvedChallenges}}</div>
+      <div class="col-last">{{team.lastSolve}}</div>
+    </div>
+  </div>
+</div>

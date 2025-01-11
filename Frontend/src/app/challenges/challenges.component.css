@@ -1,0 +1,155 @@
+.scoreboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  color: #0f0;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.stats-bar {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid #0f0;
+  border-radius: 4px;
+}
+
+.stat {
+  color: #0f0;
+  font-family: 'Courier New', monospace;
+}
+
+.filters {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.05);
+  border-radius: 4px;
+}
+
+.filter-group label {
+  color: #0f0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+select {
+  background: #0a0a0a;
+  color: #0f0;
+  border: 1px solid #0f0;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #0f0;
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.challenge-card {
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid #0f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+.challenge-card:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.challenge-card.solved {
+  border-color: #00ff00;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.challenge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.category-tag {
+  background: rgba(0, 255, 0, 0.2);
+  color: #0f0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.points {
+  color: #0f0;
+  font-weight: bold;
+}
+
+.challenge-name {
+  color: #0f0;
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.challenge-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.difficulty {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.difficulty.easy { background: rgba(0, 255, 0, 0.2); color: #0f0; }
+.difficulty.medium { background: rgba(255, 165, 0, 0.2); color: #ffa500; }
+.difficulty.hard { background: rgba(255, 0, 0, 0.2); color: #ff3333; }
+
+.solved-by {
+  color: #0f0;
+  font-size: 0.9rem;
+}
+
+.solve-btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid #0f0;
+  color: #0f0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s;
+}
+
+.solve-btn:hover:not(:disabled) {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.solve-btn:disabled {
+  border-color: #00ff00;
+  color: #00ff00;
+  cursor: not-allowed;
+}

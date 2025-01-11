@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  color: #0f0;
+  font-family: 'Courier New', monospace;
+}
