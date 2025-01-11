@@ -1,0 +1,182 @@
+.profile-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #0f0;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid #0f0;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 255, 0, 0.1);
+  border: 2px solid #0f0;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.user-info h1 {
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+}
+
+.user-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat .label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.stat .value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.section {
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid #0f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.section h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activity-item {
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.1);
+  border-radius: 4px;
+}
+
+.challenge-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.achievements-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.achievement-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 255, 0, 0.1);
+  border-radius: 4px;
+}
+
+.achievement-icon {
+  font-size: 2rem;
+}
+
+.achievement-info h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.achievement-info p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin: 0 0 0.5rem 0;
+}
+
+.unlock-date {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hack-input {
+  width: 100%;
+  padding: 0.5rem;
+  background: rgba(0, 255, 0, 0.1);
+  border: 1px solid #0f0;
+  border-radius: 4px;
+  color: #0f0;
+  font-family: 'Courier New', monospace;
+}
+
+.hack-input:focus {
+  outline: none;
+  box-shadow: 0 0 5px #0f0;
+}
+
+.hack-button {
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid #0f0;
+  color: #0f0;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.hack-button:hover {
+  background: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+.hack-text {
+  color: #0f0;
+  font-weight: bold;
+}
