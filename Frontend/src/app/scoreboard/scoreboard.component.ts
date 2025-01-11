@@ -18,7 +18,7 @@ interface TeamScore {
 export class ScoreboardComponent {
   teams: TeamScore[] = [
     { "rank": 1, "name": "yvsei", "points": 4500, "solvedChallenges": 15, "lastSolve": "2 mins ago", "country": "🇺🇸 USA" },
-    { "rank": 2, "name": "CryptoShadow", "points": 4200, "solvedChallenges": 14, "lastSolve": "5 mins ago", "country": "🇬🇧 UK" },
+    { "rank": 2, "name": "kraken", "points": 4200, "solvedChallenges": 14, "lastSolve": "5 mins ago", "country": "🇬🇧 UK" },
     { "rank": 3, "name": "NinjaV0id", "points": 3800, "solvedChallenges": 13, "lastSolve": "15 mins ago", "country": "🇯🇵 Japan" },
     { "rank": 4, "name": "HexWraith", "points": 3500, "solvedChallenges": 12, "lastSolve": "20 mins ago", "country": "🇩🇪 Germany" },
     { "rank": 5, "name": "DataDaemon", "points": 3200, "solvedChallenges": 11, "lastSolve": "25 mins ago", "country": "🇨🇦 Canada" },
