@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgFor} from '@angular/common';
+import {ChallengesService} from './challenges.service';
+import {ChallengeInterface} from './Challenge.interface';
+import {HttpClient} from '@angular/common/http';
 interface Challenge {
   id: number;
   name: string;
@@ -10,7 +13,7 @@ interface Challenge {
   solved: boolean;
   solvedBy: number;
 }
-@Component({
+@Component ({
   selector: 'app-challenges',
   templateUrl: './challenges.component.html',
   imports: [
@@ -18,7 +21,17 @@ interface Challenge {
   ],
   styleUrl: './challenges.component.css'
 })
-export class ChallengesComponent {
+export class ChallengesComponent implements OnInit {
+
+  constructor(private readonly challengeService: ChallengesService) {}
+  ngOnInit(): void {
+    this.challengeService.getAllChallenges().subscribe((response: ChallengeInterface[])=>
+    {
+      console.log(response)
+    })
+  }
+
+
   challenges: Challenge[] = [
     { "id": 1, "name": "SQL Injection Basics", "category": "Web", "difficulty": "Easy", "points": 100, "solved": true, "solvedBy": 89 },
     { "id": 2, "name": "Advanced XSS", "category": "Web", "difficulty": "Hard", "points": 400, "solved": false, "solvedBy": 12 },
@@ -70,6 +83,9 @@ export class ChallengesComponent {
   get availablePoints(): number {
     return this.challenges.reduce((sum, c) => sum + (c.solved ? 0 : c.points), 0);
   }
+
+
+
 
 
 }
