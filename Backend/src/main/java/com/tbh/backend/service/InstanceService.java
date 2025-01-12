@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class InstanceService {
     private final InstanceRepository instanceRepository;
 
-    @Autowired
     public InstanceService(InstanceRepository instanceRepository) {
         this.instanceRepository = instanceRepository;
     }

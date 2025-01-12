@@ -14,7 +14,6 @@ import java.util.Optional;
 public class InstanceController {
     private final InstanceService instanceService;
 
-    @Autowired
     public InstanceController(InstanceService instanceService) {
         this.instanceService = instanceService;
     }
