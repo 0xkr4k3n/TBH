@@ -14,7 +14,6 @@ import java.util.Optional;
 public class ChallengeController {
     private final ChallengeService challengeService;
 
-    @Autowired
     public ChallengeController(ChallengeService challengeService) {
         this.challengeService = challengeService;
     }

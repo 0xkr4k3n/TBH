@@ -11,15 +11,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-
 public class InstanceService {
-    private InstanceRepository instanceRepository;
+    private final InstanceRepository instanceRepository;
 
     public InstanceService(InstanceRepository instanceRepository) {
         this.instanceRepository = instanceRepository;
     }
 
-
+    
     private IntanceDTO mapToDTO(Instance instance) {
         return new IntanceDTO(
                 instance.getId(),
