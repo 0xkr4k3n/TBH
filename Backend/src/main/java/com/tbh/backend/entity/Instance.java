@@ -3,13 +3,22 @@ package com.tbh.backend.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="instances")
+@Table(name = "instances")
 public class Instance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String ip;
     private int port;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "challenge_id", nullable = false)
+    private Challenge challenge;
 
     public Instance(Long id, String ip, int port) {
         this.id = id;

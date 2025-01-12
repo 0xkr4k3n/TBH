@@ -1,7 +1,6 @@
 package com.tbh.backend.dto;
 
-import java.sql.Date;
-
+import java.util.Date;
 public class ChallengeDTO {
     private Long id;
     private String name;

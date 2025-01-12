@@ -13,15 +13,15 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;..
+    private final UserRepository userRepository;
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
     private UserDTO mapToDTO(User user) {
-        return new UserDTO(user.getId(), user.getUsername(), user.getCreatedAt());
+        return new UserDTO(user.getId(), user.getUsername(), user.getCountry(), user.getPoints(), user.getSolves(), user.getLastSolve(), user.getCreatedAt());
     }
     private User mapToEntity(UserDTO userDTO) {
-        return new User( userDTO.getId(), userDTO.getUsername(), userDTO.getCreatedAt());
+        return new User(userDTO.getId(), userDTO.getUsername(), userDTO.getCountry(), userDTO.getPoints(), userDTO.getSolves(), userDTO.getLastSolve(), userDTO.getCreatedAt());
     }
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()

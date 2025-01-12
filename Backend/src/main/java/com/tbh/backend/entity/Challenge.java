@@ -1,20 +1,30 @@
 package com.tbh.backend.entity;
 
 import jakarta.persistence.*;
-
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name="challenges")
+@Table(name = "challenges")
 public class Challenge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
     private String difficulty;
     private int solves;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Instance> instances;
+
+    @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Solution> solutions;
+
 
     public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt) {
         this.id = id;
