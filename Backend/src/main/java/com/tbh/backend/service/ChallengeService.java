@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class ChallengeService {
     private final ChallengeRepository challengeRepository;
 
-    @Autowired
     public ChallengeService(ChallengeRepository challengeRepository) {
         this.challengeRepository = challengeRepository;
     }

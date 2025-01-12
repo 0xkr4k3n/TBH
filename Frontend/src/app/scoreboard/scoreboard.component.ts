@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NgFor} from '@angular/common';
+
 interface TeamScore {
   rank: number;
   name: string;
