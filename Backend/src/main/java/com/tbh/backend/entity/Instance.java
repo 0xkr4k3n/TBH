@@ -3,7 +3,7 @@ package com.tbh.backend.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="intances")
+@Table(name="instances")
 public class Instance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +15,10 @@ public class Instance {
         this.id = id;
         this.ip = ip;
         this.port = port;
+    }
+
+    public Instance() {
+
     }
 
     public void setId(Long id) {

@@ -12,6 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
+    private Date createdAt;
 
     public User(Long id, String username, Date createdAt) {
         this.id = id;
@@ -46,7 +47,5 @@ public class User {
     public Date getCreatedAt() {
         return createdAt;
     }
-
-    private Date createdAt;
 
 }
