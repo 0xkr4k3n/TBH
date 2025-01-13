@@ -3,10 +3,9 @@ export interface ChallengeInterface{
   name : string
   description: string
   difficulty: String
-  solves: number
   createdAt: Date;
-  solved: boolean;
-  solvedBy: number;
+  solves: number;
   category?: string,
-  points?: number
+  points: number,
+  solved:boolean
 }

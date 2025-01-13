@@ -18,7 +18,23 @@ public class Challenge {
     private String category;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+    public int getPoints() {
+        return points;
+    }
+    public void setPoints(int points) {
+        this.points = points;
+    }
+    private int points;
 
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
+    }
+
+    private boolean solved=false;
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Instance> instances;
 
@@ -26,7 +42,7 @@ public class Challenge {
     private List<Solution> solutions;
 
 
-    public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt, String category) {
+    public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt, String category, int points, boolean solved) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -34,6 +50,7 @@ public class Challenge {
         this.solves = solves;
         this.createdAt = createdAt;
         this.category=category;
+        this.solved=solved;
     }
 
     public Challenge() {

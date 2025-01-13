@@ -10,7 +10,27 @@ public class ChallengeDTO {
     private Date createdAt;
     private String category;
 
-    public ChallengeDTO(Long id, String name, String description, String difficulty, int solves, Date createdAt, String category) {
+    public boolean isSolved() {
+        return solved;
+    }
+
+    public void setSolved(boolean solved) {
+        this.solved = solved;
+    }
+
+    private boolean solved;
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    private int points;
+
+    public ChallengeDTO(Long id, String name, String description, String difficulty, int solves, Date createdAt, String category,int points,boolean solved) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -18,6 +38,8 @@ public class ChallengeDTO {
         this.solves = solves;
         this.createdAt = createdAt;
         this.category=category;
+        this.points=points;
+        this.solved=solved;
     }
 
     public void setId(Long id) {

@@ -27,7 +27,9 @@ public class ChallengeService {
                 challenge.getDifficulty(),
                 challenge.getSolves(),
                 challenge.getCreatedAt(),
-                challenge.getCategory()
+                challenge.getCategory(),
+                challenge.getPoints(),
+                challenge.isSolved()
         );
     }
 
@@ -40,7 +42,9 @@ public class ChallengeService {
                 challengeDTO.getDifficulty(),
                 challengeDTO.getSolves(),
                 challengeDTO.getCreatedAt(),
-                challengeDTO.getCategory()
+                challengeDTO.getCategory(),
+                challengeDTO.getPoints(),
+                challengeDTO.isSolved()
         );
     }
 

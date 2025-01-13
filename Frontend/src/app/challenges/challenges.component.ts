@@ -19,13 +19,22 @@ export class ChallengesComponent implements OnInit {
   constructor(private readonly challengeService: ChallengesService) {}
   ngOnInit(): void {
      this.challengeService.getAllChallenges().subscribe((response: ChallengeInterface[])=>{
+       console.log(response);
        this.challenges=response;
      })
   }
 
-
-
-  categories = ['Binary Exploitation', 'Web', 'Reverse Engineering', 'Cryptography', 'Networking', 'Forensics'];
+  categories = [
+    "Web",
+    "Network",
+    "Reverse Engineering",
+    "Crypto",
+    "Forensics",
+    "Mobile",
+    "OSINT",
+    "Cloud",
+    "Application"
+  ];
   difficulties = ['Easy', 'Medium', 'Hard'];
 
   selectedCategory = '';
@@ -38,15 +47,15 @@ export class ChallengesComponent implements OnInit {
       const categoryMatch = !this.selectedCategory || challenge.category === this.selectedCategory;
       const difficultyMatch = !this.selectedDifficulty || challenge.difficulty === this.selectedDifficulty;
       const statusMatch = !this.selectedStatus ||
-        (this.selectedStatus === 'solved' && challenge.solved) ||
-        (this.selectedStatus === 'unsolved' && !challenge.solved);
+        (this.selectedStatus === 'solved' && challenge.solves) ||
+        (this.selectedStatus === 'unsolved' && !challenge.solves);
 
       return categoryMatch && difficultyMatch && statusMatch;
     });
   }
 
   get solvedCount(): number {
-    return this.challenges.filter(c => c.solved).length;
+    return this.challenges.filter(c => c.solves).length;
   }
 
   get availablePoints(): number {
