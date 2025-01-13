@@ -5,4 +5,8 @@ export interface ChallengeInterface{
   difficulty: String
   solves: number
   createdAt: Date;
+  solved: boolean;
+  solvedBy: number;
+  category?: string,
+  points?: number
 }
