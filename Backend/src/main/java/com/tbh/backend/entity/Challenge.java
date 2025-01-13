@@ -15,7 +15,7 @@ public class Challenge {
     private String description;
     private String difficulty;
     private int solves;
-
+    private String category;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
@@ -26,13 +26,14 @@ public class Challenge {
     private List<Solution> solutions;
 
 
-    public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt) {
+    public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt, String category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
         this.solves = solves;
         this.createdAt = createdAt;
+        this.category=category;
     }
 
     public Challenge() {
@@ -85,6 +86,30 @@ public class Challenge {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public List<Instance> getInstances() {
+        return instances;
+    }
+
+    public List<Solution> getSolutions() {
+        return solutions;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setInstances(List<Instance> instances) {
+        this.instances = instances;
+    }
+
+    public void setSolutions(List<Solution> solutions) {
+        this.solutions = solutions;
     }
 }
 
