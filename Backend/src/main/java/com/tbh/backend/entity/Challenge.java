@@ -33,13 +33,15 @@ public class Challenge {
     private List<Solution> solutions;
 
 
-    public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt, String category, int points, boolean solved) {
+    public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt, int points, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
         this.solves = solves;
         this.createdAt = createdAt;
+        this.points=points;
+        this.category=category;
     }
 
     public Challenge() {

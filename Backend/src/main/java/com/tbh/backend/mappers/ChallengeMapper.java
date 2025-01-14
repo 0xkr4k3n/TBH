@@ -2,6 +2,7 @@ package com.tbh.backend.mappers;
 
 import com.tbh.backend.dto.ChallengeDTO;
 import com.tbh.backend.dto.IntanceDTO;
+import com.tbh.backend.entity.Category;
 import com.tbh.backend.entity.Challenge;
 import com.tbh.backend.entity.Instance;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChallengeMapper {
 
+    Category category=Category.builder()
+            .name("Test")
+            .id(1L)
+            .build();
 
     public ChallengeDTO mapToDTO(Challenge challenge) {
         return new ChallengeDTO(
@@ -18,7 +23,8 @@ public class ChallengeMapper {
                 challenge.getDifficulty(),
                 challenge.getSolves(),
                 challenge.getCreatedAt(),
-                challenge.getPoints()
+                challenge.getPoints(),
+                category.getName()
         );
     }
 
@@ -31,9 +37,8 @@ public class ChallengeMapper {
                 challengeDTO.getDifficulty(),
                 challengeDTO.getSolves(),
                 challengeDTO.getCreatedAt(),
-                challengeDTO.getCategory(),
                 challengeDTO.getPoints(),
-                challengeDTO.isSolved()
+                category
         );
     }
 
