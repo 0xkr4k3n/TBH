@@ -30,16 +30,14 @@ public class ChallengeDTO {
 
     private int points;
 
-    public ChallengeDTO(Long id, String name, String description, String difficulty, int solves, Date createdAt, String category,int points,boolean solved) {
+    public ChallengeDTO(Long id, String name, String description, String difficulty, int solves, Date createdAt,int points) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
         this.solves = solves;
         this.createdAt = createdAt;
-        this.category=category;
         this.points=points;
-        this.solved=solved;
     }
 
     public void setId(Long id) {

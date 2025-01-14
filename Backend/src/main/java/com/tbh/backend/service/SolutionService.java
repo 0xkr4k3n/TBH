@@ -4,6 +4,7 @@ import com.tbh.backend.dto.SolutionDTO;
 import com.tbh.backend.entity.Challenge;
 import com.tbh.backend.entity.Solution;
 import com.tbh.backend.entity.User;
+import com.tbh.backend.mappers.SolutionMapper;
 import com.tbh.backend.repository.ChallengeRepository;
 import com.tbh.backend.repository.SolutionRepository;
 import com.tbh.backend.repository.UserRepository;
@@ -17,37 +18,43 @@ import java.util.stream.Collectors;
 @Service
 public class SolutionService {
 
-    @Autowired
     private SolutionRepository solutionRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private ChallengeRepository challengeRepository;
+
+    private final SolutionMapper solutionMapper;
+
+    public SolutionService(SolutionRepository solutionRepository, UserRepository userRepository, ChallengeRepository challengeRepository, SolutionMapper solutionMapper) {
+        this.solutionRepository = solutionRepository;
+        this.userRepository = userRepository;
+        this.challengeRepository = challengeRepository;
+        this.solutionMapper = solutionMapper;
+    }
+
 
     public List<SolutionDTO> getAllSolutions() {
         List<Solution> solutions = solutionRepository.findAll();
-        return solutions.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return solutions.stream().map(solutionMapper::convertToDTO).collect(Collectors.toList());
     }
     public SolutionDTO getSolutionById(Long id) {
         Solution solution = solutionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Solution not found with id: " + id));
-        return convertToDTO(solution);
+        return solutionMapper.convertToDTO(solution);
     }
     public SolutionDTO createSolution(Long userId, Long challengeId, Date solvedAt) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
         Challenge challenge = challengeRepository.findById(challengeId)
                 .orElseThrow(() -> new RuntimeException("Challenge not found with id: " + challengeId));
-
         Solution solution = new Solution();
         solution.setUser(user);
         solution.setChallenge(challenge);
         solution.setSolvedAt(solvedAt);
 
         Solution savedSolution = solutionRepository.save(solution);
-        return convertToDTO(savedSolution);
+        return solutionMapper.convertToDTO(savedSolution);
     }
 
 
@@ -58,7 +65,7 @@ public class SolutionService {
         solution.setSolvedAt(newSolvedAt);
 
         Solution updatedSolution = solutionRepository.save(solution);
-        return convertToDTO(updatedSolution);
+        return solutionMapper.convertToDTO(updatedSolution);
     }
 
 
@@ -70,14 +77,5 @@ public class SolutionService {
     }
 
 
-    private SolutionDTO convertToDTO(Solution solution) {
-        return new SolutionDTO(
-                solution.getId(),
-                solution.getUser().getId(),
-                solution.getUser().getUsername(),
-                solution.getChallenge().getId(),
-                solution.getChallenge().getName(),
-                solution.getSolvedAt()
-        );
-    }
+
 }

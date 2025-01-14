@@ -3,6 +3,7 @@ package com.tbh.backend.service;
 
 import com.tbh.backend.dto.UserDTO;
 import com.tbh.backend.entity.User;
+import com.tbh.backend.mappers.UserMapper;
 import com.tbh.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,32 +15,29 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    public UserService(UserRepository userRepository) {
+    private final UserMapper userMapper;
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
-    private UserDTO mapToDTO(User user) {
-        return new UserDTO(user.getId(), user.getUsername(), user.getCountry(), user.getPoints(), user.getSolves(), user.getLastSolve(), user.getCreatedAt());
-    }
-    private User mapToEntity(UserDTO userDTO) {
-        return new User(userDTO.getId(), userDTO.getUsername(), userDTO.getCountry(), userDTO.getPoints(), userDTO.getSolves(), userDTO.getLastSolve(), userDTO.getCreatedAt());
-    }
+
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
-                .map(this::mapToDTO)
+                .map(userMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     
     public Optional<UserDTO> getUserById(Long id) {
         return userRepository.findById(id)
-                .map(this::mapToDTO);
+                .map(userMapper::mapToDTO);
     }
 
     
     public UserDTO createUser(UserDTO userDTO) {
-        User user = mapToEntity(userDTO);
+        User user = userMapper.mapToEntity(userDTO);
         User savedUser = userRepository.save(user);
-        return mapToDTO(savedUser);
+        return userMapper.mapToDTO(savedUser);
     }
 
     
@@ -47,10 +45,10 @@ public class UserService {
         if (!userRepository.existsById(id)) {
             throw new RuntimeException("User not found with id: " + id);
         }
-        User user = mapToEntity(userDTO);
+        User user = userMapper.mapToEntity(userDTO);
         user.setId(id); 
         User updatedUser = userRepository.save(user);
-        return mapToDTO(updatedUser);
+        return userMapper.mapToDTO(updatedUser);
     }
 
     

@@ -1,9 +1,13 @@
 package com.tbh.backend.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "instances")
+@Getter
+@Setter
 public class Instance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,27 +34,5 @@ public class Instance {
 
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public int getPort() {
-        return port;
-    }
 }

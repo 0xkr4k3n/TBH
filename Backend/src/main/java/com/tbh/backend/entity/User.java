@@ -1,7 +1,10 @@
 package com.tbh.backend.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Date;
@@ -9,6 +12,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,59 +48,4 @@ public class User {
 
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public void setSolves(int solves) {
-        this.solves = solves;
-    }
-
-    public void setLastSolve(Date lastSolve) {
-        this.lastSolve = lastSolve;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public int getSolves() {
-        return solves;
-    }
-
-    public Date getLastSolve() {
-        return lastSolve;
-    }
 }

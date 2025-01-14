@@ -25,13 +25,15 @@ public class BackendApplication implements CommandLineRunner {
         String namespace = "default";  // Change this as necessary
         String filePath = "/home/kraken/Code/TBH/Challenges/challenge_1_basic_xss/challenge_1_deployment.yaml";  // Adjust path as necessary
 
-        try {
+       /* try {
             V1Deployment deployment = kubernetesService.createDeploymentFromFile(namespace, filePath);
             System.out.println("Deployment created successfully: " + deployment.getMetadata().getName());
         } catch (Exception e) {
             System.err.println("Failed to create deployment: " + e.getMessage());
             e.printStackTrace();
         }
+        */
+
 
     }
 }

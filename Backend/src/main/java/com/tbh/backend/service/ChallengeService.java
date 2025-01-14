@@ -2,6 +2,7 @@ package com.tbh.backend.service;
 
 import com.tbh.backend.dto.ChallengeDTO;
 import com.tbh.backend.entity.Challenge;
+import com.tbh.backend.mappers.ChallengeMapper;
 import com.tbh.backend.repository.ChallengeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,59 +14,32 @@ import java.util.stream.Collectors;
 @Service
 public class ChallengeService {
     private final ChallengeRepository challengeRepository;
-
-    public ChallengeService(ChallengeRepository challengeRepository) {
+    private final ChallengeMapper challengeMapper;
+    public ChallengeService(ChallengeRepository challengeRepository, ChallengeMapper challengeMapper) {
         this.challengeRepository = challengeRepository;
+        this.challengeMapper = challengeMapper;
     }
 
     
-    private ChallengeDTO mapToDTO(Challenge challenge) {
-        return new ChallengeDTO(
-                challenge.getId(),
-                challenge.getName(),
-                challenge.getDescription(),
-                challenge.getDifficulty(),
-                challenge.getSolves(),
-                challenge.getCreatedAt(),
-                challenge.getCategory(),
-                challenge.getPoints(),
-                challenge.isSolved()
-        );
-    }
-
-    
-    private Challenge mapToEntity(ChallengeDTO challengeDTO) {
-        return new Challenge(
-                challengeDTO.getId(),
-                challengeDTO.getName(),
-                challengeDTO.getDescription(),
-                challengeDTO.getDifficulty(),
-                challengeDTO.getSolves(),
-                challengeDTO.getCreatedAt(),
-                challengeDTO.getCategory(),
-                challengeDTO.getPoints(),
-                challengeDTO.isSolved()
-        );
-    }
 
     
     public List<ChallengeDTO> getAllChallenges() {
         return challengeRepository.findAll().stream()
-                .map(this::mapToDTO)
+                .map(challengeMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     
     public Optional<ChallengeDTO> getChallengeById(Long id) {
         return challengeRepository.findById(id)
-                .map(this::mapToDTO);
+                .map(challengeMapper::mapToDTO);
     }
 
     
     public ChallengeDTO createChallenge(ChallengeDTO challengeDTO) {
-        Challenge challenge = mapToEntity(challengeDTO);
+        Challenge challenge = challengeMapper.mapToEntity(challengeDTO);
         Challenge savedChallenge = challengeRepository.save(challenge);
-        return mapToDTO(savedChallenge);
+        return challengeMapper.mapToDTO(savedChallenge);
     }
 
     
@@ -73,10 +47,10 @@ public class ChallengeService {
         if (!challengeRepository.existsById(id)) {
             throw new RuntimeException("Challenge not found with id: " + id);
         }
-        Challenge challenge = mapToEntity(challengeDTO);
+        Challenge challenge = challengeMapper.mapToEntity(challengeDTO);
         challenge.setId(id); 
         Challenge updatedChallenge = challengeRepository.save(challenge);
-        return mapToDTO(updatedChallenge);
+        return challengeMapper.mapToDTO(updatedChallenge);
     }
 
     

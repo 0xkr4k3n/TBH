@@ -2,6 +2,7 @@ package com.tbh.backend.service;
 
 import com.tbh.backend.dto.IntanceDTO;
 import com.tbh.backend.entity.Instance;
+import com.tbh.backend.mappers.InstanceMapper;
 import com.tbh.backend.repository.InstanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,47 +14,31 @@ import java.util.stream.Collectors;
 @Service
 public class InstanceService {
     private final InstanceRepository instanceRepository;
+    private final InstanceMapper instanceMapper;
 
-    public InstanceService(InstanceRepository instanceRepository) {
+    public InstanceService(InstanceRepository instanceRepository, InstanceMapper instanceMapper) {
         this.instanceRepository = instanceRepository;
-    }
-
-    
-    private IntanceDTO mapToDTO(Instance instance) {
-        return new IntanceDTO(
-                instance.getId(),
-                instance.getIp(),
-                instance.getPort()
-        );
-    }
-
-    
-    private Instance mapToEntity(IntanceDTO intanceDTO) {
-        return new Instance(
-                intanceDTO.getId(),
-                intanceDTO.getIp(),
-                intanceDTO.getPort()
-        );
+        this.instanceMapper = instanceMapper;
     }
 
     
     public List<IntanceDTO> getAllInstances() {
         return instanceRepository.findAll().stream()
-                .map(this::mapToDTO)
+                .map(instanceMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     
     public Optional<IntanceDTO> getInstanceById(Long id) {
         return instanceRepository.findById(id)
-                .map(this::mapToDTO);
+                .map(instanceMapper::mapToDTO);
     }
 
     
     public IntanceDTO createInstance(IntanceDTO intanceDTO) {
-        Instance instance = mapToEntity(intanceDTO);
+        Instance instance = instanceMapper.mapToEntity(intanceDTO);
         Instance savedInstance = instanceRepository.save(instance);
-        return mapToDTO(savedInstance);
+        return instanceMapper.mapToDTO(savedInstance);
     }
 
     
@@ -61,10 +46,10 @@ public class InstanceService {
         if (!instanceRepository.existsById(id)) {
             throw new RuntimeException("Instance not found with id: " + id);
         }
-        Instance instance = mapToEntity(intanceDTO);
+        Instance instance = instanceMapper.mapToEntity(intanceDTO);
         instance.setId(id); 
         Instance updatedInstance = instanceRepository.save(instance);
-        return mapToDTO(updatedInstance);
+        return instanceMapper.mapToDTO(updatedInstance);
     }
 
     
