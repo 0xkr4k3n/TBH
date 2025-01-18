@@ -1,10 +1,8 @@
 package com.tbh.backend.mappers;
 
 import com.tbh.backend.dto.ChallengeDTO;
-import com.tbh.backend.dto.IntanceDTO;
 import com.tbh.backend.entity.Category;
 import com.tbh.backend.entity.Challenge;
-import com.tbh.backend.entity.Instance;
 import org.springframework.stereotype.Component;
 
 @Component

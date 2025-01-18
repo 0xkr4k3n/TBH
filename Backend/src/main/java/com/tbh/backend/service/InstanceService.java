@@ -1,10 +1,9 @@
 package com.tbh.backend.service;
 
-import com.tbh.backend.dto.IntanceDTO;
+import com.tbh.backend.dto.InstanceDTO;
 import com.tbh.backend.entity.Instance;
 import com.tbh.backend.mappers.InstanceMapper;
 import com.tbh.backend.repository.InstanceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,31 +21,31 @@ public class InstanceService {
     }
 
     
-    public List<IntanceDTO> getAllInstances() {
+    public List<InstanceDTO> getAllInstances() {
         return instanceRepository.findAll().stream()
                 .map(instanceMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     
-    public Optional<IntanceDTO> getInstanceById(Long id) {
+    public Optional<InstanceDTO> getInstanceById(Long id) {
         return instanceRepository.findById(id)
                 .map(instanceMapper::mapToDTO);
     }
 
     
-    public IntanceDTO createInstance(IntanceDTO intanceDTO) {
-        Instance instance = instanceMapper.mapToEntity(intanceDTO);
+    public InstanceDTO createInstance(InstanceDTO instanceDTO) {
+        Instance instance = instanceMapper.mapToEntity(instanceDTO);
         Instance savedInstance = instanceRepository.save(instance);
         return instanceMapper.mapToDTO(savedInstance);
     }
 
     
-    public IntanceDTO updateInstance(Long id, IntanceDTO intanceDTO) {
+    public InstanceDTO updateInstance(Long id, InstanceDTO instanceDTO) {
         if (!instanceRepository.existsById(id)) {
             throw new RuntimeException("Instance not found with id: " + id);
         }
-        Instance instance = instanceMapper.mapToEntity(intanceDTO);
+        Instance instance = instanceMapper.mapToEntity(instanceDTO);
         instance.setId(id); 
         Instance updatedInstance = instanceRepository.save(instance);
         return instanceMapper.mapToDTO(updatedInstance);

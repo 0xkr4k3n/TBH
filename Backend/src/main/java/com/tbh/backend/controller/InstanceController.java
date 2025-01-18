@@ -1,8 +1,7 @@
 package com.tbh.backend.controller;
 
-import com.tbh.backend.dto.IntanceDTO;
+import com.tbh.backend.dto.InstanceDTO;
 import com.tbh.backend.service.InstanceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,30 +19,30 @@ public class InstanceController {
 
     
     @GetMapping
-    public List<IntanceDTO> getAllInstances() {
+    public List<InstanceDTO> getAllInstances() {
         return instanceService.getAllInstances();
     }
 
     
     @GetMapping("/{id}")
-    public ResponseEntity<IntanceDTO> getInstanceById(@PathVariable Long id) {
-        Optional<IntanceDTO> instance = instanceService.getInstanceById(id);
+    public ResponseEntity<InstanceDTO> getInstanceById(@PathVariable Long id) {
+        Optional<InstanceDTO> instance = instanceService.getInstanceById(id);
         return instance.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     
     @PostMapping
-    public ResponseEntity<IntanceDTO> createInstance(@RequestBody IntanceDTO intanceDTO) {
-        IntanceDTO createdInstance = instanceService.createInstance(intanceDTO);
+    public ResponseEntity<InstanceDTO> createInstance(@RequestBody InstanceDTO instanceDTO) {
+        InstanceDTO createdInstance = instanceService.createInstance(instanceDTO);
         return ResponseEntity.ok(createdInstance);
     }
 
     
     @PutMapping("/{id}")
-    public ResponseEntity<IntanceDTO> updateInstance(@PathVariable Long id, @RequestBody IntanceDTO intanceDTO) {
+    public ResponseEntity<InstanceDTO> updateInstance(@PathVariable Long id, @RequestBody InstanceDTO instanceDTO) {
         try {
-            IntanceDTO updatedInstance = instanceService.updateInstance(id, intanceDTO);
+            InstanceDTO updatedInstance = instanceService.updateInstance(id, instanceDTO);
             return ResponseEntity.ok(updatedInstance);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
