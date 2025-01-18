@@ -18,14 +18,35 @@ import java.io.IOException;
 public class KubernetesService {
 
     private final AppsV1Api appsV1Api;
+    private final CoreV1Api coreV1Api;
+
 
     @Autowired
-    public KubernetesService(AppsV1Api appsV1Api){
+    public KubernetesService(AppsV1Api appsV1Api, CoreV1Api coreV1Api) {
         this.appsV1Api = appsV1Api;
+        this.coreV1Api = coreV1Api;
+    }
+    public V1Service createServiceFromFile(String namespace, String fileName, String documentIndex) throws IOException {
+        V1Service service = KubernetesUtils.loadServiceFromFile(fileName, documentIndex);
+        try {
+            return coreV1Api.createNamespacedService(
+                    namespace,
+                    service
+            ).execute();
+        } catch (ApiException e) {
+            throw new IOException("Failed to create service: " + e.getMessage(), e);
+        }
     }
 
-    public V1Deployment createDeploymentFromFile(String namespace, String filePath) throws ApiException, IOException {
-        V1Deployment deployment = KubernetesUtils.loadDeploymentFromFile(filePath);
-        return appsV1Api.createNamespacedDeployment(namespace, deployment).execute();
+    public V1Deployment createDeploymentFromFile(String namespace, String fileName, String documentIndex) throws IOException {
+        V1Deployment deployment = KubernetesUtils.loadDeploymentFromFile(fileName, documentIndex);
+        try {
+            return appsV1Api.createNamespacedDeployment(
+                    namespace,
+                    deployment
+            ).execute();
+        } catch (ApiException e) {
+            throw new IOException("Failed to create deployment: " + e.getMessage(), e);
+        }
     }
 }
