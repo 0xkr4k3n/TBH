@@ -22,7 +22,8 @@ public class ChallengeMapper {
                 challenge.getSolves(),
                 challenge.getCreatedAt(),
                 challenge.getPoints(),
-                category.getName()
+                category.getName(),
+                challenge.getPath()
         );
     }
 
@@ -36,7 +37,8 @@ public class ChallengeMapper {
                 challengeDTO.getSolves(),
                 challengeDTO.getCreatedAt(),
                 challengeDTO.getPoints(),
-                category
+                category,
+                challengeDTO.getPath()
         );
     }
 

@@ -1,5 +1,6 @@
 package com.tbh.backend.controller;
 
+import com.tbh.backend.dto.InstanceDTO;
 import com.tbh.backend.service.ChallengeService;
 import com.tbh.backend.dto.ChallengeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +33,19 @@ public class ChallengeController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    
+
     @PostMapping
     public ResponseEntity<ChallengeDTO> createChallenge(@RequestBody ChallengeDTO challengeDTO) {
         ChallengeDTO createdChallenge = challengeService.createChallenge(challengeDTO);
         return ResponseEntity.ok(createdChallenge);
     }
 
-    
+    @PostMapping("/run/{id}")
+    public ResponseEntity<InstanceDTO> runChallenge(@PathVariable Long id, @RequestParam Long userId) {
+        // Run challenge and create an instance
+        InstanceDTO createdInstance = challengeService.runChallenge(id, userId);
+        return ResponseEntity.ok(createdInstance);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<ChallengeDTO> updateChallenge(@PathVariable Long id, @RequestBody ChallengeDTO challengeDTO) {
         try {

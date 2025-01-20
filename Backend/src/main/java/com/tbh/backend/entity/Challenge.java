@@ -32,8 +32,8 @@ public class Challenge {
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Solution> solutions;
 
-
-    public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt, int points, Category category) {
+    private String path;
+    public Challenge(Long id, String name, String description, String difficulty, int solves, Date createdAt, int points, Category category, String path) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,6 +42,7 @@ public class Challenge {
         this.createdAt = createdAt;
         this.points=points;
         this.category=category;
+        this.path=path;
     }
 
     public Challenge() {

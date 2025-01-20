@@ -26,16 +26,16 @@ public class BackendApplication implements CommandLineRunner {
         String namespace = "default";  // Change this as necessary
         String filePath = "/home/kraken/Code/TBH/Challenges/challenge_1_basic_xss/challenge_1_deployment.yaml";  // Adjust path as necessary
 
-        try {
-            V1Deployment deployment = kubernetesService.createDeploymentFromFile(namespace, filePath, "0");
-            System.out.println("Deployment created successfully: " + deployment.getMetadata().getName());
-
-            V1Service service = kubernetesService.createServiceFromFile(namespace, filePath, "1");
-            System.out.println("Service created successfully: " + service.getMetadata().getName());
-        } catch (Exception e) {
-            System.err.println("Failed to create resources: " + e.getMessage());
-            e.printStackTrace();
-        }
+//        try {
+//            V1Deployment deployment = kubernetesService.createDeploymentFromFile(namespace, filePath, "0");
+//            System.out.println("Deployment created successfully: " + deployment.getMetadata().getName());
+//
+//            V1Service service = kubernetesService.createServiceFromFile(namespace, filePath, "1");
+//            System.out.println("Service created successfully: " + service.getMetadata().getName());
+//        } catch (Exception e) {
+//            System.err.println("Failed to create resources: " + e.getMessage());
+//            e.printStackTrace();
+//        }
 
 
     }

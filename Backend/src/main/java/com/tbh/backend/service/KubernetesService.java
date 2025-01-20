@@ -26,6 +26,15 @@ public class KubernetesService {
         this.appsV1Api = appsV1Api;
         this.coreV1Api = coreV1Api;
     }
+
+    public AppsV1Api getAppsV1Api() {
+        return appsV1Api;
+    }
+
+    public CoreV1Api getCoreV1Api() {
+        return coreV1Api;
+    }
+
     public V1Service createServiceFromFile(String namespace, String fileName, String documentIndex) throws IOException {
         V1Service service = KubernetesUtils.loadServiceFromFile(fileName, documentIndex);
         try {
