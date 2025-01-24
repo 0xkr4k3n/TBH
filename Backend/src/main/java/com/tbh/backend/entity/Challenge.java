@@ -24,7 +24,7 @@ public class Challenge {
     private Date createdAt;
 
     private int points;
-    @OneToOne
+    @ManyToOne
     Category category;
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -12,6 +12,7 @@ import com.tbh.backend.repository.UserRepository;
 import io.kubernetes.client.openapi.apis.AppsV1Api;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.V1Deployment;
+import io.kubernetes.client.openapi.models.V1Ingress;
 import io.kubernetes.client.openapi.models.V1Service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,14 +91,17 @@ public class ChallengeService {
         String ip = null;
         int port = -1;
         try {
-            V1Deployment deployment = kubernetesService.createDeploymentFromFile("default", challenge.getPath(), "0");
+            V1Deployment deployment = kubernetesService.createDeploymentFromFile("default", challenge.getPath() + "/deployment.yaml", "0");
             System.out.println("Deployment created successfully: " + deployment.getMetadata().getName());
 
-            V1Service service = kubernetesService.createServiceFromFile("default", challenge.getPath(), "1");
+            V1Service service = kubernetesService.createServiceFromFile("default", challenge.getPath() + "/deployment.yaml" , "1");
             System.out.println("Service created successfully: " + service.getMetadata().getName());
 
             CoreV1Api coreV1Api = kubernetesService.getCoreV1Api();
             V1Service createdService = coreV1Api.readNamespacedService(service.getMetadata().getName(), "default").execute();
+
+            V1Ingress ingress = kubernetesService.createIngressFromFile("default", challenge.getPath() + "/ingress.yaml", "0");
+            System.out.println("Ingress created successfully: " + ingress.getMetadata().getName());
 
             if (createdService.getSpec().getType().equals("NodePort")) {
                 ip = "192.168.49.2"; // Example Minikube IP, replace with your node's IP

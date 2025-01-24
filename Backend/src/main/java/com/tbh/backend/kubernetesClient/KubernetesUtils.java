@@ -4,10 +4,13 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.kubernetes.client.openapi.models.V1Deployment;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import io.kubernetes.client.openapi.models.V1Ingress;
 import io.kubernetes.client.openapi.models.V1Service;
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.kubernetes.client.util.Yaml;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 
@@ -27,6 +30,11 @@ public class KubernetesUtils {
     public static V1Service loadServiceFromFile(String fileName, String documentIndex) throws IOException {
         Map<String, Object> resourceMap = loadYamlDocument(fileName, documentIndex);
         return mapper.convertValue(resourceMap, V1Service.class);
+    }
+
+    public static V1Ingress loadIngressFromFile(String fileName, String documentIndex) throws IOException {
+        Map<String, Object> resourceMap = loadYamlDocument(fileName, documentIndex);
+        return mapper.convertValue(resourceMap, V1Ingress.class);
     }
 
     private static Map<String, Object> loadYamlDocument(String fileName, String documentIndex) throws IOException {

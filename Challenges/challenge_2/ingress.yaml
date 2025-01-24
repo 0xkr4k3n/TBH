@@ -1,0 +1,16 @@
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: xss-ingress
+  spec:
+    rules:
+      - host: xss.example.com
+        http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: xss-service
+                  port:
+                    number: 80
