@@ -11,10 +11,10 @@
   <div class="filters">
     <div class="filter-group">
       <label>
-        <span class="hack-text">&gt;</span> Category:
+        <span class="hack-text">&gt;</span> Categories:
         <select [(ngModel)]="selectedCategory">
           <option value="">All</option>
-          <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{cat.name}}</option>
         </select>
       </label>
     </div>
@@ -60,6 +60,7 @@
               Solved by: {{challenge.solves}}
             </span>
       </div>
+      <!-- todo: challenge page -->
       <button class="solve-btn" [disabled]="challenge.solved">
         {{ challenge.solved ? 'SOLVED' : 'SOLVE' }}
       </button>

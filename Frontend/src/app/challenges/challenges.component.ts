@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgFor} from '@angular/common';
-import {ChallengesService} from './challenges.service';
-import {ChallengeInterface} from './Challenge.interface';
+import {ChallengesService} from '../service/challenges.service';
+import {ChallengeInterface} from '../interface/Challenge.interface';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {CategoriesService} from '../service/categories.service';
+import {CategoryInterface} from '../interface/category.interface';
 
 @Component ({
   selector: 'app-challenges',
@@ -16,25 +18,20 @@ import {Observable} from 'rxjs';
 })
 export class ChallengesComponent implements OnInit {
   challenges: ChallengeInterface[]=[];
-  constructor(private readonly challengeService: ChallengesService) {}
+  categories: CategoryInterface[]= [];
+  constructor(private readonly challengeService: ChallengesService, private  readonly categoriesService: CategoriesService) {}
   ngOnInit(): void {
      this.challengeService.getAllChallenges().subscribe((response: ChallengeInterface[])=>{
        console.log(response);
        this.challenges=response;
      })
+
+    this.categoriesService.getAllCategories().subscribe((response:  CategoryInterface[])=>{
+      console.log(response);
+      this.categories=response;
+    })
   }
 
-  categories = [
-    "Web",
-    "Network",
-    "Reverse Engineering",
-    "Crypto",
-    "Forensics",
-    "Mobile",
-    "OSINT",
-    "Cloud",
-    "Application"
-  ];
   difficulties = ['Easy', 'Medium', 'Hard'];
 
   selectedCategory = '';
