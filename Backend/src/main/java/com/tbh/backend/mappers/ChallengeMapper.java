@@ -3,15 +3,14 @@ package com.tbh.backend.mappers;
 import com.tbh.backend.dto.ChallengeDTO;
 import com.tbh.backend.entity.Category;
 import com.tbh.backend.entity.Challenge;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ChallengeMapper {
 
-    Category category=Category.builder()
-            .name("Test")
-            .id(1L)
-            .build();
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     public ChallengeDTO mapToDTO(Challenge challenge) {
         return new ChallengeDTO(
@@ -22,7 +21,7 @@ public class ChallengeMapper {
                 challenge.getSolves(),
                 challenge.getCreatedAt(),
                 challenge.getPoints(),
-                category.getName(),
+                challenge.getCategory(),
                 challenge.getPath()
         );
     }
@@ -37,7 +36,7 @@ public class ChallengeMapper {
                 challengeDTO.getSolves(),
                 challengeDTO.getCreatedAt(),
                 challengeDTO.getPoints(),
-                category,
+                challengeDTO.getCategory(),
                 challengeDTO.getPath()
         );
     }

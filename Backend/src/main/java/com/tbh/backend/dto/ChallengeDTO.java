@@ -15,12 +15,12 @@ public class ChallengeDTO {
     private String difficulty;
     private int solves;
     private Date createdAt;
-    private String category;
+    private Category category;
     private int points;
     private String path;
 
 
-    public ChallengeDTO(Long id, String name, String description, String difficulty, int solves, Date createdAt, int points, String s, String path) {
+    public ChallengeDTO(Long id, String name, String description, String difficulty, int solves, Date createdAt, int points, Category category, String path) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -28,7 +28,7 @@ public class ChallengeDTO {
         this.solves = solves;
         this.createdAt = createdAt;
         this.points=points;
-        this.category=s;
+        this.category=category;
         this.path=path;
     }
 

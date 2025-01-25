@@ -2,10 +2,12 @@ package com.tbh.backend.service;
 
 import com.tbh.backend.dto.ChallengeDTO;
 import com.tbh.backend.dto.InstanceDTO;
+import com.tbh.backend.entity.Category;
 import com.tbh.backend.entity.Challenge;
 import com.tbh.backend.entity.Instance;
 import com.tbh.backend.entity.User;
 import com.tbh.backend.mappers.ChallengeMapper;
+import com.tbh.backend.repository.CategoryRepository;
 import com.tbh.backend.repository.ChallengeRepository;
 import com.tbh.backend.repository.InstanceRepository;
 import com.tbh.backend.repository.UserRepository;
@@ -29,15 +31,17 @@ public class ChallengeService {
     private final UserRepository userRepository;
     private final InstanceRepository instanceRepository;
     private KubernetesService kubernetesService;
+    private final CategoryRepository categoryRepository;
 
 
     @Autowired
-    public ChallengeService(ChallengeRepository challengeRepository,ChallengeMapper challengeMapper, UserRepository userRepository, InstanceRepository instanceRepository, KubernetesService kubernetesService) {
+    public ChallengeService(ChallengeRepository challengeRepository,ChallengeMapper challengeMapper, UserRepository userRepository, InstanceRepository instanceRepository, KubernetesService kubernetesService,CategoryRepository categoryRepository) {
         this.challengeRepository = challengeRepository;
         this.challengeMapper = challengeMapper;
         this.userRepository = userRepository;
         this.instanceRepository = instanceRepository;
         this.kubernetesService = kubernetesService;
+        this.categoryRepository = categoryRepository;
     }
 
     
@@ -55,14 +59,21 @@ public class ChallengeService {
                 .map(challengeMapper::mapToDTO);
     }
 
-    
+
     public ChallengeDTO createChallenge(ChallengeDTO challengeDTO) {
         Challenge challenge = challengeMapper.mapToEntity(challengeDTO);
+
+        if (challengeDTO.getCategory() != null) {
+            Category category = categoryRepository.findById(challengeDTO.getCategory().getId())
+                    .orElseThrow(() -> new EntityNotFoundException("Category not found"));
+            challenge.setCategory(category);
+        }
+
         Challenge savedChallenge = challengeRepository.save(challenge);
         return challengeMapper.mapToDTO(savedChallenge);
     }
 
-    
+
     public ChallengeDTO updateChallenge(Long id, ChallengeDTO challengeDTO) {
         if (!challengeRepository.existsById(id)) {
             throw new RuntimeException("Challenge not found with id: " + id);

@@ -1,5 +1,7 @@
 package com.tbh.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +27,8 @@ public class Challenge {
 
     private int points;
     @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    @JsonManagedReference
     Category category;
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.ALL, orphanRemoval = true)

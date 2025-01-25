@@ -1,5 +1,6 @@
 package com.tbh.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,11 +20,16 @@ public class Category {
 
     private String name;
 
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Challenge> challenges;
+
     public Category() {
     }
 
-    public Category(Long id, String name) {
+    public Category(Long id, String name, List<Challenge> challenges) {
         this.id = id;
         this.name = name;
+        this.challenges = challenges;
     }
 }
