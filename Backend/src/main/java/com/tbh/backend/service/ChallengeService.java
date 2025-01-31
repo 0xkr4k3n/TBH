@@ -32,16 +32,17 @@ public class ChallengeService {
     private final InstanceRepository instanceRepository;
     private KubernetesService kubernetesService;
     private final CategoryRepository categoryRepository;
-
+    private final DnsService dnsService;
 
     @Autowired
-    public ChallengeService(ChallengeRepository challengeRepository,ChallengeMapper challengeMapper, UserRepository userRepository, InstanceRepository instanceRepository, KubernetesService kubernetesService,CategoryRepository categoryRepository) {
+    public ChallengeService(ChallengeRepository challengeRepository,ChallengeMapper challengeMapper, UserRepository userRepository, InstanceRepository instanceRepository, KubernetesService kubernetesService,CategoryRepository categoryRepository, DnsService dnsService) {
         this.challengeRepository = challengeRepository;
         this.challengeMapper = challengeMapper;
         this.userRepository = userRepository;
         this.instanceRepository = instanceRepository;
         this.kubernetesService = kubernetesService;
         this.categoryRepository = categoryRepository;
+        this.dnsService = dnsService;
     }
 
     
@@ -124,6 +125,7 @@ public class ChallengeService {
                 ip = createdService.getStatus().getLoadBalancer().getIngress().get(0).getIp();
                 port = createdService.getSpec().getPorts().get(0).getPort();
             }
+            dnsService.addChallengeDomain(deployment.getMetadata().getName());
         } catch (Exception e) {
             System.err.println("Failed to create resources: " + e.getMessage());
             e.printStackTrace();
