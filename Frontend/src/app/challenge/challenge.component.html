@@ -53,7 +53,7 @@
     <!-- Challenge Output -->
     <div class="bg-gray-900 p-4 rounded font-mono text-sm flex justify-center">
       <span *ngIf="url">You can access the challenge using this URL: </span>
-      <a *ngIf="url" href="http://{{ url }}.tbh.com" target="_blank">http://{{ url }}.tbh.com</a>
+      <a *ngIf="url" href="http://{{ url }}.tbh.com" target="_blank" class="ml-2">http://{{ url }}.tbh.com</a>
       <span *ngIf="!url">Challenge environment output will appear here...</span>
     </div>
 
