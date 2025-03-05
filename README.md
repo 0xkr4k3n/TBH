@@ -96,6 +96,9 @@ TBH ("To Be Honest") is a gamified penetration testing environment inspired by p
 ### Scoreboard
 ![Scoreboard](images/scoreboard.png)
 
+### Challenge Page
+![challenge.png](images%2Fchallenge.png)
+
 
 ## Running Locally
 
