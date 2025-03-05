@@ -26,7 +26,6 @@ TBH ("To Be Honest") is a gamified penetration testing environment inspired by p
 6. **CI/CD Pipeline:**
     - Jenkins is used for continuous integration and deployment to ensure streamlined updates and reliable operations.
 
----
 
 ## Workflow
 
@@ -45,7 +44,6 @@ TBH ("To Be Honest") is a gamified penetration testing environment inspired by p
 4. **Challenge Access:**
     - Users access challenges via their assigned subdomains within the VPN-secured network.
 
----
 
 ## Technology Stack
 
@@ -67,7 +65,6 @@ TBH ("To Be Honest") is a gamified penetration testing environment inspired by p
 ### Logging & Monitoring
 - ELK Stack (Elasticsearch, Logstash, Kibana) - Planned
 
----
 
 ## Current Goals
 
@@ -84,14 +81,12 @@ TBH ("To Be Honest") is a gamified penetration testing environment inspired by p
 ### CI/CD
 - Build and deploy all components (Angular, Spring Boot, DNS, Database) using a single `deployment.yaml` file.
 
----
 
 ## Future Plans
 - **Virtual Machine Support:** Extend challenge hosting to include VMs.
 - **Production Readiness:** Refine configurations for deployment in production environments.
 - **Logging:** Use the ELK stack for logging and troubleshooting.
 
----
 
 ## Screenshots
 
@@ -101,7 +96,6 @@ TBH ("To Be Honest") is a gamified penetration testing environment inspired by p
 ### Scoreboard
 ![Scoreboard](images/scoreboard.png)
 
----
 
 ## Running Locally
 
@@ -132,7 +126,6 @@ TBH ("To Be Honest") is a gamified penetration testing environment inspired by p
 
 5. Access the platform via the Angular frontend.
 
----
 
 ## Contributing
 
