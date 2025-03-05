@@ -45,8 +45,12 @@
     <div *ngFor="let challenge of filteredChallenges"
          class="challenge-card"
          [class.solved]="challenge.solves">
+
       <div class="challenge-header">
-        <span class="category-tag">{{challenge.category}}</span>
+        <div>
+          >
+          <span class="category-tag">{{challenge.category.name}}</span>
+        </div>
         <span class="points">{{challenge.points}} pts</span>
       </div>
       <h3 class="challenge-name">
@@ -61,7 +65,7 @@
             </span>
       </div>
       <!-- todo: challenge page -->
-      <button class="solve-btn" [disabled]="challenge.solved">
+      <button (click)="navigateToChallenge(challenge.id)" class="solve-btn" [disabled]="challenge.solved">
         {{ challenge.solved ? 'SOLVED' : 'SOLVE' }}
       </button>
     </div>

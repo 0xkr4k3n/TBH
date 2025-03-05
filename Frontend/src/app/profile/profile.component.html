@@ -1,101 +1,101 @@
-<!--<div class="profile-container">-->
-<!--  &lt;!&ndash; User Header &ndash;&gt;-->
-<!--  <div class="user-header">-->
-<!--    <div class="user-avatar">-->
-<!--      <span class="hack-text">[</span>-->
-<!--      H4X0R-->
-<!--      <span class="hack-text">]</span>-->
-<!--    </div>-->
-<!--    <div class="user-info">-->
-<!--      <h1>-->
-<!--        <span class="hack-text">&gt;</span>-->
-<!--        {{userProfile.username}}-->
-<!--        <span class="blink">_</span>-->
-<!--      </h1>-->
-<!--      <div class="user-stats">-->
-<!--        <div class="stat">-->
-<!--          <span class="label">Rank</span>-->
-<!--          <span class="value">#{{userProfile.rank}}</span>-->
-<!--        </div>-->
-<!--        <div class="stat">-->
-<!--          <span class="label">Points</span>-->
-<!--          <span class="value">{{userProfile.points}}</span>-->
-<!--        </div>-->
-<!--        <div class="stat">-->
-<!--          <span class="label">Solved</span>-->
-<!--          <span class="value">{{userProfile.solvedChallenges}}</span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+<div class="profile-container">
+  <!-- User Header -->
+  <div class="user-header">
+    <div class="user-avatar">
+      <span class="hack-text">[</span>
+      H4X0R
+      <span class="hack-text">]</span>
+    </div>
+    <div class="user-info">
+      <h1>
+        <span class="hack-text">&gt;</span>
+        {{userProfile.username}}
+        <span class="blink">_</span>
+      </h1>
+      <div class="user-stats">
+        <div class="stat">
+          <span class="label">Rank</span>
+          <span class="value">#{{userProfile.rank}}</span>
+        </div>
+        <div class="stat">
+          <span class="label">Points</span>
+          <span class="value">{{userProfile.points}}</span>
+        </div>
+        <div class="stat">
+          <span class="label">Solved</span>
+          <span class="value">{{userProfile.solvedChallenges}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!--  &lt;!&ndash; Main Content &ndash;&gt;-->
-<!--  <div class="content-grid">-->
-<!--    &lt;!&ndash; Recent Activity &ndash;&gt;-->
-<!--    <div class="section">-->
-<!--      <h2><span class="hack-text">[</span> Recent Activity <span class="hack-text">]</span></h2>-->
-<!--      <div class="activity-list">-->
-<!--        <div *ngFor="let challenge of recentSolves" class="activity-item">-->
-<!--          <div class="challenge-name">-->
-<!--            <span class="hack-text">&gt;</span> {{challenge.name}}-->
-<!--          </div>-->
-<!--          <div class="challenge-details">-->
-<!--            <span class="category">{{challenge.category}}</span>-->
-<!--            <span class="points">+{{challenge.points}} pts</span>-->
-<!--            <span class="time">{{challenge.solvedAt}}</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+  <!-- Main Content -->
+  <div class="content-grid">
+    <!-- Recent Activity -->
+    <div class="section">
+      <h2><span class="hack-text">[</span> Recent Activity <span class="hack-text">]</span></h2>
+      <div class="activity-list">
+        <div *ngFor="let challenge of recentSolves" class="activity-item">
+          <div class="challenge-name">
+            <span class="hack-text">&gt;</span> {{challenge.name}}
+          </div>
+          <div class="challenge-details">
+            <span class="category">{{challenge.category}}</span>
+            <span class="points">+{{challenge.points}} pts</span>
+            <span class="time">{{challenge.solvedAt}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<!--    &lt;!&ndash; Achievements &ndash;&gt;-->
-<!--    <div class="section">-->
-<!--      <h2><span class="hack-text">[</span> Achievements <span class="hack-text">]</span></h2>-->
-<!--      <div class="achievements-grid">-->
-<!--        <div *ngFor="let achievement of achievements"-->
-<!--             class="achievement-card">-->
-<!--          <div class="achievement-icon">{{achievement.icon}}</div>-->
-<!--          <div class="achievement-info">-->
-<!--            <h3>{{achievement.name}}</h3>-->
-<!--            <p>{{achievement.description}}</p>-->
-<!--            <span class="unlock-date">{{achievement.unlockedAt}}</span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!-- Achievements -->
+    <div class="section">
+      <h2><span class="hack-text">[</span> Achievements <span class="hack-text">]</span></h2>
+      <div class="achievements-grid">
+        <div *ngFor="let achievement of achievements"
+             class="achievement-card">
+          <div class="achievement-icon">{{achievement.icon}}</div>
+          <div class="achievement-info">
+            <h3>{{achievement.name}}</h3>
+            <p>{{achievement.description}}</p>
+            <span class="unlock-date">{{achievement.unlockedAt}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<!--    &lt;!&ndash; Settings &ndash;&gt;-->
-<!--    <div class="section">-->
-<!--      <h2><span class="hack-text">[</span> Settings <span class="hack-text">]</span></h2>-->
-<!--      <div class="settings-form">-->
-<!--        <div class="form-group">-->
-<!--          <label>-->
-<!--            <span class="hack-text">&gt;</span> Username-->
-<!--            <input type="text" [(ngModel)]="userProfile.username" class="hack-input">-->
-<!--          </label>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label>-->
-<!--            <span class="hack-text">&gt;</span> Email-->
-<!--            <input type="email" [(ngModel)]="userProfile.email" class="hack-input">-->
-<!--          </label>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <label>-->
-<!--            <span class="hack-text">&gt;</span> Country-->
-<!--            <select [(ngModel)]="userProfile.country" class="hack-input">-->
-<!--              <option value="usa">United States</option>-->
-<!--              <option value="uk">United Kingdom</option>-->
-<!--              <option value="jp">Japan</option>-->
-<!--            </select>-->
-<!--          </label>-->
-<!--        </div>-->
-<!--        <button class="hack-button">-->
-<!--          <span class="hack-text">&lt;</span>-->
-<!--          Update Profile-->
-<!--          <span class="hack-text">&gt;</span>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+    <!-- Settings -->
+    <div class="section">
+      <h2><span class="hack-text">[</span> Settings <span class="hack-text">]</span></h2>
+      <div class="settings-form">
+        <div class="form-group">
+          <label>
+            <span class="hack-text">&gt;</span> Username
+            <input type="text" [(ngModel)]="userProfile.username" class="hack-input">
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            <span class="hack-text">&gt;</span> Email
+            <input type="email" [(ngModel)]="userProfile.email" class="hack-input">
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            <span class="hack-text">&gt;</span> Country
+            <select [(ngModel)]="userProfile.country" class="hack-input">
+              <option value="usa">United States</option>
+              <option value="uk">United Kingdom</option>
+              <option value="jp">Japan</option>
+            </select>
+          </label>
+        </div>
+        <button class="hack-button">
+          <span class="hack-text">&lt;</span>
+          Update Profile
+          <span class="hack-text">&gt;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

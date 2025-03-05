@@ -1,7 +1,7 @@
 import {CategoryInterface} from './category.interface';
 
 export interface ChallengeInterface{
-  id?: number
+  id: number
   name : string
   description: string
   difficulty: String

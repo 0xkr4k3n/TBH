@@ -40,11 +40,11 @@ public class ChallengeController {
         return ResponseEntity.ok(createdChallenge);
     }
 
-    @PostMapping("/run/{id}")
-    public ResponseEntity<InstanceDTO> runChallenge(@PathVariable Long id, @RequestParam Long userId) {
+    @GetMapping("/run/{id}")
+    public ResponseEntity<String> runChallenge(@PathVariable Long id, @RequestParam Long userId) {
         // Run challenge and create an instance
-        InstanceDTO createdInstance = challengeService.runChallenge(id, userId);
-        return ResponseEntity.ok(createdInstance);
+        String url = challengeService.runChallenge(id, userId);
+        return ResponseEntity.ok(url);
     }
     @PutMapping("/{id}")
     public ResponseEntity<ChallengeDTO> updateChallenge(@PathVariable Long id, @RequestBody ChallengeDTO challengeDTO) {

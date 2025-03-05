@@ -22,4 +22,10 @@ export class ChallengesService {
   createChallenge(challenge :ChallengeInterface){
     return this.httpClient.post(this.API_ROUTE, challenge)
   }
+  runChallenge(challengeId : number){
+    console.log("running challenge" + challengeId)
+    return this.httpClient.get(this.API_ROUTE + `/run/${challengeId}` + '?userId=1', {
+        responseType: 'text' // Specify that the response is plain text
+      });
+  }
 }

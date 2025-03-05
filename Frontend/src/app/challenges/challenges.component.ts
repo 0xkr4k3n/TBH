@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CategoriesService} from '../service/categories.service';
 import {CategoryInterface} from '../interface/category.interface';
+import { Router } from '@angular/router';
 
 @Component ({
   selector: 'app-challenges',
@@ -19,7 +20,9 @@ import {CategoryInterface} from '../interface/category.interface';
 export class ChallengesComponent implements OnInit {
   challenges: ChallengeInterface[]=[];
   categories: CategoryInterface[]= [];
-  constructor(private readonly challengeService: ChallengesService, private  readonly categoriesService: CategoriesService) {}
+  constructor(private readonly challengeService: ChallengesService,
+              private  readonly categoriesService: CategoriesService,
+              private router: Router) {}
   ngOnInit(): void {
      this.challengeService.getAllChallenges().subscribe((response: ChallengeInterface[])=>{
        console.log(response);
@@ -67,8 +70,10 @@ export class ChallengesComponent implements OnInit {
     })
   }
 
-
-
+  navigateToChallenge(id: number | undefined) {
+    console.log("id of chall " + id)
+    this.router.navigate(['/challenge'], { queryParams: { id: id } });
+  }
 
 
 }

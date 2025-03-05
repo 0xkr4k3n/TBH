@@ -1,0 +1,102 @@
+<div class="bg-black text-green-500 p-6 mx-[10rem] rounded-lg">
+  <div *ngIf="challenge; else loading">
+    <!-- Challenge Header -->
+    <div class="flex justify-between items-center border-b border-green-500 pb-4 mb-6">
+        <div class="flex items-center">
+        <div class="text-5xl mr-4">🚩</div>
+        <div>
+          <h1 class="text-2xl font-bold mb-2">{{ challenge.name }}</h1>
+          <div class="flex items-center">
+            <span class="text-yellow-500 font-semibold mr-5">
+              Difficulty: {{ challenge.difficulty }}
+            </span>
+            <div class="flex space-x-2">
+              <span class="bg-gray-800 text-green-300 px-2 py-1 rounded text-xs">{{ challenge.category.name }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col space-y-2">
+        <div *ngIf="challengeStarted" class="bg-gray-900 p-4 rounded flex justify-between items-center">
+          <span class="mr-2">Time Remaining: {{ formatTime(timeRemaining) }}</span>
+          <div class="space-x-2">
+            <button
+              class="px-3 py-1 bg-green-700 text-white rounded hover:bg-green-600"
+              (click)="extendTime()"
+            >
+              + 1 Hour
+            </button>
+            <button
+              class="px-3 py-1 bg-red-700 text-white rounded hover:bg-red-600"
+              (click)="stopChallenge()"
+            >
+              Stop Challenge
+            </button>
+          </div>
+        </div>
+      </div>
+        <div *ngIf="!challengeStarted">
+          <button
+            class="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-600 transition-colors"
+            (click)="startChallenge()"
+          >
+            Start Challenge
+          </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Challenge Output -->
+    <div class="bg-gray-900 p-4 rounded font-mono text-sm flex justify-center">
+      <span *ngIf="url">You can access the challenge using this URL: </span>
+      <a *ngIf="url" href="http://{{ url }}.tbh.com" target="_blank">http://{{ url }}.tbh.com</a>
+      <span *ngIf="!url">Challenge environment output will appear here...</span>
+    </div>
+
+    <!-- Challenge Description -->
+    <div class="bg-gray-900 p-4 rounded mb-6">
+      <p>{{ challenge.description }}</p>
+    </div>
+
+    <div class="flex space-x-4 mb-6">
+      <input
+        type="text"
+        placeholder="Enter your flag here"
+        class="flex-grow bg-gray-800 text-green-400 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        [(ngModel)]="flagSubmitted"
+        name="flagSubmitted"
+      >
+      <button
+        class="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-600 transition-colors"
+        (click)="submitFlag()"
+      >
+        Verify Flag
+      </button>
+    </div>
+
+    <!-- Challenge History -->
+    <div class="bg-gray-900 p-4 rounded mb-6">
+      <h2 class="text-xl font-bold mb-4 border-b border-green-700 pb-2">Challenge History</h2>
+<!--      <div *ngIf="challengeHistory.length > 0; else noHistory" class="space-y-2">-->
+<!--        <div *ngFor="let history of challengeHistory" class="flex justify-between bg-gray-800 p-3 rounded">-->
+<!--          <div class="flex items-center space-x-3">-->
+<!--            <span class="text-green-400 font-bold">PWNED BY</span>-->
+<!--            <span class="text-white">{{ history.user }}</span>-->
+<!--          </div>-->
+<!--          <span class="text-yellow-500">({{ history.points }} PTS)</span>-->
+<!--        </div>-->
+<!--      </div>-->
+      <ng-template #noHistory>
+        <p class="text-gray-500 italic">No successful attempts yet</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="text-center text-gray-500">Loading challenge...</div>
+  </ng-template>
+</div>

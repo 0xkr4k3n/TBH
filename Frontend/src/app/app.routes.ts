@@ -3,6 +3,7 @@ import {ChallengesComponent} from './challenges/challenges.component';
 import {ProfileComponent} from './profile/profile.component';
 import {ScoreboardComponent} from './scoreboard/scoreboard.component';
 import {HomeComponent} from './home/home.component';
+import {ChallengeComponent} from './challenge/challenge.component';
 
 export const routes: Routes = [
   { path: '',redirectTo: "/home",pathMatch:"full" },
@@ -10,4 +11,5 @@ export const routes: Routes = [
   { path: 'challenges',component: ChallengesComponent },
   { path: 'profile',component: ProfileComponent },
   { path: 'scoreboard',component: ScoreboardComponent },
+  { path: 'challenge',component: ChallengeComponent },
 ];

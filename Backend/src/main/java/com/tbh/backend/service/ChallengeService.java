@@ -94,7 +94,8 @@ public class ChallengeService {
         }
     }
 
-    public InstanceDTO runChallenge(Long challengeId, Long userId) {
+    public String runChallenge(Long challengeId, Long userId) {
+        String domainName = new String();
         // Fetch the challenge and user
         Challenge challenge = challengeRepository.findById(challengeId)
                 .orElseThrow(() -> new EntityNotFoundException("Challenge not found"));
@@ -115,17 +116,8 @@ public class ChallengeService {
             V1Ingress ingress = kubernetesService.createIngressFromFile("default", challenge.getPath() + "/ingress.yaml", "0");
             System.out.println("Ingress created successfully: " + ingress.getMetadata().getName());
 
-            if (createdService.getSpec().getType().equals("NodePort")) {
-                ip = "192.168.49.2"; // Example Minikube IP, replace with your node's IP
-                port = createdService.getSpec().getPorts().get(0).getNodePort();
-            } else if (createdService.getSpec().getType().equals("ClusterIP")) {
-                ip = createdService.getSpec().getClusterIP();
-                port = createdService.getSpec().getPorts().get(0).getPort();
-            } else if (createdService.getSpec().getType().equals("LoadBalancer")) {
-                ip = createdService.getStatus().getLoadBalancer().getIngress().get(0).getIp();
-                port = createdService.getSpec().getPorts().get(0).getPort();
-            }
-            dnsService.addChallengeDomain(deployment.getMetadata().getName());
+            domainName = deployment.getMetadata().getName();
+            dnsService.addChallengeDomain(domainName);
         } catch (Exception e) {
             System.err.println("Failed to create resources: " + e.getMessage());
             e.printStackTrace();
@@ -143,6 +135,6 @@ public class ChallengeService {
         Instance savedInstance = instanceRepository.save(instance);
 
         // Return the DTO
-        return new InstanceDTO(savedInstance.getId(), savedInstance.getIp(), savedInstance.getPort());
+        return domainName;
     }
 }
