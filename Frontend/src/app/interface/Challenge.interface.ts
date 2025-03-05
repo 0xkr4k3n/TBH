@@ -1,3 +1,5 @@
+import {CategoryInterface} from './category.interface';
+
 export interface ChallengeInterface{
   id?: number
   name : string
@@ -5,7 +7,7 @@ export interface ChallengeInterface{
   difficulty: String
   createdAt: Date;
   solves: number;
-  category?: string,
+  category: CategoryInterface,
   points: number,
   solved:boolean
 }

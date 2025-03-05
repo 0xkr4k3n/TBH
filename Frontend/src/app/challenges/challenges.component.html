@@ -12,7 +12,7 @@
     <div class="filter-group">
       <label>
         <span class="hack-text">&gt;</span> Categories:
-        <select [(ngModel)]="selectedCategory">
+        <select [(ngModel)]="selectedCategory" (change)="loadChallenges()">
           <option value="">All</option>
           <option *ngFor="let cat of categories" [value]="cat">{{cat.name}}</option>
         </select>

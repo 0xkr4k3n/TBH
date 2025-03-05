@@ -34,14 +34,14 @@ export class ChallengesComponent implements OnInit {
 
   difficulties = ['Easy', 'Medium', 'Hard'];
 
-  selectedCategory = '';
+  selectedCategory!: CategoryInterface;
   selectedDifficulty = '';
   selectedStatus = '';
 
 
   get filteredChallenges(): ChallengeInterface[] {
     return this.challenges.filter(challenge => {
-      const categoryMatch = !this.selectedCategory || challenge.category === this.selectedCategory;
+      const categoryMatch = !this.selectedCategory || challenge.category.id ==- this.selectedCategory.id;
       const difficultyMatch = !this.selectedDifficulty || challenge.difficulty === this.selectedDifficulty;
       const statusMatch = !this.selectedStatus ||
         (this.selectedStatus === 'solved' && challenge.solves) ||
@@ -58,6 +58,13 @@ export class ChallengesComponent implements OnInit {
   get availablePoints(): number {
     // @ts-ignore
     return this.challenges.reduce((sum, c) => sum + (c.solved ? 0 : c.points), 0);
+  }
+
+  loadChallenges(): void{
+    this.categoriesService.getChallengesByCategory(this.selectedCategory.id).subscribe((response: ChallengeInterface[])=>{
+      console.log(response);
+      this.challenges=response;
+    })
   }
 
 

@@ -17,4 +17,10 @@ export class CategoriesService {
   getAllCategories() : Observable<CategoryInterface[]>{
     return this.httpClient.get<CategoryInterface[]>(this.API_ROUTE);
   }
+  getChallengesByCategory(categoryId: Number): Observable<ChallengeInterface[]> {
+    if (categoryId === null) {
+      return this.httpClient.get<any[]>(this.API_ROUTE); // Fetch all challenges
+    }
+    return this.httpClient.get<ChallengeInterface[]>(`${this.API_ROUTE}/${categoryId}/challenges`);
+  }
 }
