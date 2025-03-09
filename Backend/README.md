@@ -12,7 +12,17 @@ This will create a JAR file in the `target/` directory.
 
 ---
 
-### 2. **Run the Application**
+### 2. **Run DNSMASQ**
+Macos:
+```bash
+sudo brew services start dnsmasq
+```
+
+---
+
+### 3. **Run the Application**
+you can run hte project locally for dev or testing purposes 
+<br>OR<br>
 Use Docker Compose to build and run the application with its dependencies:
 ```bash
 docker-compose up --build
