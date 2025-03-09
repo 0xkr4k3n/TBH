@@ -28,4 +28,9 @@ export class ChallengesService {
         responseType: 'text' // Specify that the response is plain text
       });
   }
+  stopChallenge(challengeId : number){
+    return this.httpClient.get(this.API_ROUTE + `/stop/${challengeId}` + '?userId=1', {
+      responseType: 'text' // Specify that the response is plain text
+    });
+  }
 }

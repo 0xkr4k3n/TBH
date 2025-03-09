@@ -84,9 +84,17 @@ export class ChallengeComponent implements OnInit, OnDestroy {
   }
 
   stopChallenge() {
-    this.challengeStarted = false;
-    this.timeRemaining = 3600;
-    this.clearTimer();
+    this.ChallengesService.stopChallenge(this.challengeId).subscribe({
+      next: (response: any) => {
+        this.challengeStarted = false;
+        this.timeRemaining = 3600;
+        this.clearTimer();
+      },
+      error: (err) => {
+        console.error('Error running challenge', err);
+
+      }
+    });
   }
 
   submitFlag() {

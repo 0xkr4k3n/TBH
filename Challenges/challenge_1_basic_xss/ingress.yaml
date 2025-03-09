@@ -1,7 +1,7 @@
   apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-    name: helloworld-ingress
+    name: xss2
   spec:
     rules:
       - host: myapp.example.com

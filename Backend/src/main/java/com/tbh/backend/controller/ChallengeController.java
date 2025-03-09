@@ -46,6 +46,13 @@ public class ChallengeController {
         String url = challengeService.runChallenge(id, userId);
         return ResponseEntity.ok(url);
     }
+
+    @GetMapping("/stop/{id}")
+    public ResponseEntity<String> stopChallenge(@PathVariable Long id, @RequestParam Long userId) {
+        // Run challenge and create an instance
+        challengeService.deleteChallenge(id, userId);
+        return ResponseEntity.ok("ok");
+    }
     @PutMapping("/{id}")
     public ResponseEntity<ChallengeDTO> updateChallenge(@PathVariable Long id, @RequestBody ChallengeDTO challengeDTO) {
         try {

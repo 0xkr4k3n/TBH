@@ -49,6 +49,19 @@ public class KubernetesService {
         }
     }
 
+    public Boolean deleteService(String namespace, String name) throws IOException {
+        try {
+            coreV1Api.deleteNamespacedService(
+                    name,
+                    namespace
+            ).execute();
+            return true;
+        } catch (ApiException e) {
+            throw new IOException("Failed to delete service: " + e.getMessage(), e);
+        }
+    }
+
+
     public V1Deployment createDeploymentFromFile(String namespace, String fileName, String documentIndex) throws IOException {
         V1Deployment deployment = KubernetesUtils.loadDeploymentFromFile(fileName, documentIndex);
         try {
@@ -61,6 +74,18 @@ public class KubernetesService {
         }
     }
 
+    public Boolean deleteDeployment(String namespace, String name) throws IOException {
+        try {
+            appsV1Api.deleteNamespacedDeployment(
+                    name,
+                    namespace
+            ).execute();
+            return true;
+        } catch (ApiException e) {
+            throw new IOException("Failed to delete deployment: " + e.getMessage(), e);
+        }
+    }
+
     public V1Ingress createIngressFromFile(String namespace, String fileName, String documentIndex) throws IOException {
         V1Ingress ingress = KubernetesUtils.loadIngressFromFile(fileName, documentIndex);
         try {
@@ -69,4 +94,18 @@ public class KubernetesService {
             throw new IOException("Failed to create ingress: " + e.getMessage(), e);
         }
     }
+
+
+    public Boolean deleteIngress(String namespace, String name) throws IOException {
+        try {
+            networkingV1Api.deleteNamespacedIngress(
+                    name,
+                    namespace
+            ).execute();
+            return true;
+        } catch (ApiException e) {
+            throw new IOException("Failed to delete ingress: " + e.getMessage(), e);
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package com.tbh.backend.service;
 
 import com.tbh.backend.dto.ChallengeDTO;
 import com.tbh.backend.dto.InstanceDTO;
+import com.tbh.backend.dto.UserDTO;
 import com.tbh.backend.entity.Category;
 import com.tbh.backend.entity.Challenge;
 import com.tbh.backend.entity.Instance;
@@ -33,9 +34,10 @@ public class ChallengeService {
     private KubernetesService kubernetesService;
     private final CategoryRepository categoryRepository;
     private final DnsService dnsService;
+    private final UserService userService;
 
     @Autowired
-    public ChallengeService(ChallengeRepository challengeRepository,ChallengeMapper challengeMapper, UserRepository userRepository, InstanceRepository instanceRepository, KubernetesService kubernetesService,CategoryRepository categoryRepository, DnsService dnsService) {
+    public ChallengeService(ChallengeRepository challengeRepository,ChallengeMapper challengeMapper, UserRepository userRepository, InstanceRepository instanceRepository, KubernetesService kubernetesService,CategoryRepository categoryRepository, DnsService dnsService, UserService userService) {
         this.challengeRepository = challengeRepository;
         this.challengeMapper = challengeMapper;
         this.userRepository = userRepository;
@@ -43,6 +45,7 @@ public class ChallengeService {
         this.kubernetesService = kubernetesService;
         this.categoryRepository = categoryRepository;
         this.dnsService = dnsService;
+        this.userService = userService;
     }
 
     
@@ -136,5 +139,40 @@ public class ChallengeService {
 
         // Return the DTO
         return domainName;
+    }
+
+    public boolean deleteChallenge(Long challengeId, Long userId) {
+        // Fetch the instance and verify the user
+
+        Instance instance = instanceRepository.findByChallengeIdAndUserId(challengeId, userId)
+                .orElseThrow(() -> new EntityNotFoundException("Instance not found"));
+
+
+        Challenge challenge = instance.getChallenge();
+        String deploymentName = challenge.getName();
+
+        try {
+            // Delete the Kubernetes resources in reverse order
+            kubernetesService.deleteIngress("default", deploymentName);
+            System.out.println("Ingress deleted successfully: " + deploymentName);
+
+            kubernetesService.deleteService("default", deploymentName);
+            System.out.println("Service deleted successfully: " + deploymentName);
+
+            kubernetesService.deleteDeployment("default", deploymentName);
+            System.out.println("Deployment deleted successfully: " + deploymentName);
+
+            // Remove domain if needed
+            dnsService.removeDomain(deploymentName + ".htb.com");
+
+            // Delete the instance from the database
+            instanceRepository.delete(instance);
+
+            return true;
+        } catch (Exception e) {
+            System.err.println("Failed to delete resources: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Deletion failed: " + e.getMessage());
+        }
     }
 }
